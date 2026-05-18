@@ -407,7 +407,7 @@ body{
                             name="expertise"
                             rows="4"
                             required
-                            placeholder="例如：全委任店家經營自媒體達到線上曝光。"
+                            placeholder="例如：協助店家建立 LINE 自動化與 AI 品牌流程。"
                             class="form-input resize-none"
                         ></textarea>
 
@@ -449,7 +449,7 @@ body{
                     <div>
 
                         <label class="block text-sm font-semibold mb-4">
-                            這隻影片想達成的目標？
+                            目前最想達成的目標？
                         </label>
 
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -470,7 +470,7 @@ body{
                                     </div>
 
                                     <div class="goal-text text-sm font-semibold text-[#7B6F66]">
-                                        增加粉絲
+                                        快速增粉
                                     </div>
 
                                 </div>
@@ -491,7 +491,7 @@ body{
                                     </div>
 
                                     <div class="goal-text text-sm font-semibold text-[#7B6F66]">
-                                        引導留言
+                                        提高互動
                                     </div>
 
                                 </div>
@@ -512,7 +512,7 @@ body{
                                     </div>
 
                                     <div class="goal-text text-sm font-semibold text-[#7B6F66]">
-                                        品牌專業
+                                        品牌形象
                                     </div>
 
                                 </div>
@@ -602,7 +602,7 @@ body{
                 class="submit-btn flex items-center justify-center gap-3">
 
                 <span id="btnText">
-                    開始生成30秒口播檔案
+                    開始 AI 品牌健檢分析
                 </span>
 
                 <div id="loadingDots"
@@ -665,13 +665,10 @@ body{
 <script>
 
 /* =========================================
-   替換你的設定
+   LIFF ID
 ========================================= */
 
 const LIFF_ID = "2009393389-xo7I4wWZ";
-
-const N8N_WEBHOOK_URL =
-"https://xeresbrothers.zeabur.app/webhook/YKDLINE";
 
 /* =========================================
    LINE Profile
@@ -747,7 +744,7 @@ goalCards.forEach(card => {
 });
 
 /* =========================================
-   Submit
+   Submit (使用 liff.sendMessages 直接發送)
 ========================================= */
 
 document.getElementById("scriptForm")
@@ -764,99 +761,69 @@ document.getElementById("scriptForm")
     const loadingDots =
     document.getElementById("loadingDots");
 
-    /* Loading */
-
+    /* Loading 狀態 */
     submitBtn.disabled = true;
 
     btnText.textContent =
-    "AI 正在分析你的品牌定位";
+    "正在傳送資料至聊天室...";
 
     loadingDots.classList.remove("hidden");
     loadingDots.classList.add("flex");
 
-    /* Form Data */
-
+    /* Form Data 收集 */
     const formData = new FormData(this);
 
-    const payload = {
+    const name = formData.get("name");
+    const job = formData.get("job");
+    const expertise = formData.get("expertise");
+    const audience = formData.get("audience");
+    const video_goal = formData.get("goal") || "未選擇";
+    const p1 = formData.get("pain_point_1");
+    const p2 = formData.get("pain_point_2");
+    const p3 = formData.get("pain_point_3");
 
-        // LINE 使用者資訊
-        userId: lineProfile.userId,
+    // 組合要在聊天室自動發送的文字
+    const messageText = `【AI短影音定位健檢表單】\n` +
+                        `• 名字/品牌：${name}\n` +
+                        `• 職業職稱：${job}\n` +
+                        `• 核心技能：${expertise}\n` +
+                        `• 理想客戶：${audience}\n` +
+                        `• 影片目標：${video_goal}\n` +
+                        `• 常見痛點 1：${p1}\n` +
+                        `• 常見痛點 2：${p2}\n` +
+                        `• 常見痛點 3：${p3}`;
 
-        displayName: lineProfile.displayName,
+    try {
 
-        pictureUrl: lineProfile.pictureUrl,
+        // 檢查使用者是否在 LINE 應用程式內開啟
+        if(liff.isInClient()){
 
-        statusMessage:
-        lineProfile.statusMessage || "",
+            // 使用 liff.sendMessages 發送文字訊息
+            await liff.sendMessages([
+                {
+                    type: 'text',
+                    text: messageText
+                }
+            ]);
 
-        language:
-        liff.getLanguage(),
-
-        // 表單內容
-        name:
-        formData.get("name"),
-
-        job:
-        formData.get("job"),
-
-        expertise:
-        formData.get("expertise"),
-
-        audience:
-        formData.get("audience"),
-
-        video_goal:
-        formData.get("goal"),
-
-        pain_points: [
-
-            formData.get("pain_point_1"),
-
-            formData.get("pain_point_2"),
-
-            formData.get("pain_point_3")
-        ],
-
-        created_at:
-        new Date().toISOString()
-    };
-
-    console.log(payload);
-
-    try{
-
-        const response = await fetch(
-            N8N_WEBHOOK_URL,
-            {
-                method:"POST",
-
-                headers:{
-                    "Content-Type":"application/json"
-                },
-
-                body:JSON.stringify(payload)
-            }
-        );
-
-        if(response.ok){
-
+            // 發送成功，顯示成功彈窗
             document.getElementById("successModal")
             .classList.remove("hidden");
 
         }else{
 
-            alert("系統忙碌中，請稍後再試");
+            // 如果是用一般瀏覽器打開，提供提示
+            alert("請在 LINE 內打開此連結，才能自動傳送資料唷！");
+            console.log("表單內容：", messageText);
         }
 
     }catch(error){
 
-        console.error(error);
+        console.error("LINE 訊息傳送失敗:", error);
 
-        alert("系統連線失敗");
-    }
+        alert("訊息傳送失敗，請確認是否已加入好友或允許存取權限。");
 
-    finally{
+    }finally{
 
         submitBtn.disabled = false;
 
@@ -867,7 +834,6 @@ document.getElementById("scriptForm")
 
         loadingDots.classList.remove("flex");
     }
-
 });
 
 /* =========================================
