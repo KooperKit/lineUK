@@ -15,383 +15,879 @@
 <!-- Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 
 <style>
+
 :root{
-    --bg:#F7F3EE;
-    --bg2:#F3EEE7;
-    --card:#FFFDF9;
+    --bg:#F8F4EF;
+    --card:#FFFFFF;
     --primary:#C58B5B;
-    --primary-light:#E7C7A7;
-    --text:#3A312B;
+    --primary2:#E2B78F;
+    --text:#3C322B;
     --text-light:#7B6F66;
     --border:#EADFD3;
-    --input:#FDF9F4;
-    --success:#7BAE7F;
+    --input:#FFFCF8;
 }
+
 *{
     box-sizing:border-box;
     -webkit-tap-highlight-color: transparent;
 }
+
 html{
     scroll-behavior:smooth;
 }
+
 body{
     margin:0;
-    font-family:'Noto Sans TC',sans-serif;
-    background: radial-gradient(circle at top, #FFF6EC 0%, #F7F3EE 45%, #F3EEE7 100%);
-    color:var(--text);
     min-height:100vh;
+
+    font-family:'Noto Sans TC',sans-serif;
+
+    background:
+    radial-gradient(
+    circle at top,
+    #FFF6EB 0%,
+    #F8F4EF 45%,
+    #F3EEE8 100%
+    );
+
+    color:var(--text);
 }
-::-webkit-scrollbar{ width:5px; }
-::-webkit-scrollbar-thumb{ background:rgba(197,139,91,.35); border-radius:20px; }
+
+::-webkit-scrollbar{
+    width:5px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:rgba(197,139,91,.3);
+    border-radius:999px;
+}
+
+/* Main Card */
 
 .main-card{
-    background: rgba(255,255,255,.72);
-    backdrop-filter:blur(18px);
-    border:1px solid rgba(197,139,91,.12);
-    box-shadow: 0 10px 40px rgba(176,138,102,.08);
-}
-.form-input{
-    width:100%;
-    background:var(--input);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:15px 16px;
-    font-size:.96rem;
-    transition:.25s ease;
-    color:var(--text);
-}
-.form-input::placeholder{ color:#B7AAA0; }
-.form-input:focus{
-    outline:none;
-    border-color:var(--primary);
-    box-shadow: 0 0 0 4px rgba(197,139,91,.12);
-}
-.goal-card{
-    background:#FFFCF8;
-    border:1px solid var(--border);
-    border-radius:22px;
-    padding:18px 14px;
-    cursor:pointer;
-    transition:.25s ease;
-}
-.goal-card:hover{
-    transform:translateY(-2px);
-    border-color:var(--primary);
-    box-shadow: 0 8px 20px rgba(197,139,91,.08);
-}
-.goal-card.active{
-    background:rgba(229,198,164,.14);
-    border-color:var(--primary);
-    box-shadow: 0 8px 20px rgba(197,139,91,.08);
-}
-.goal-card.active .goal-text{ color:var(--primary); }
-.benefit-card{
-    background:rgba(255,255,255,.7);
-    border:1px solid rgba(197,139,91,.12);
-    border-radius:22px;
-    padding:16px;
-}
-.submit-btn{
-    width:100%;
-    background: linear-gradient(135deg, #D8A679 0%, #C58B5B 100%);
-    border:none;
-    color:white;
-    font-weight:700;
-    border-radius:24px;
-    padding:18px;
-    font-size:1rem;
-    transition:.3s ease;
-    box-shadow: 0 12px 24px rgba(197,139,91,.18);
-}
-.submit-btn:hover{
-    transform:translateY(-2px);
-    box-shadow: 0 18px 30px rgba(197,139,91,.24);
-}
-.submit-btn:disabled{ opacity:.7; }
-.modal-card{
-    background: rgba(255,255,255,.92);
+
+    background:
+    rgba(255,255,255,.74);
+
     backdrop-filter:blur(20px);
-    border:1px solid rgba(197,139,91,.12);
-    box-shadow: 0 10px 40px rgba(176,138,102,.18);
+
+    border:1px solid rgba(197,139,91,.1);
+
+    box-shadow:
+    0 10px 40px rgba(177,138,103,.08);
 }
-.loading-dot{ animation:bounce 1s infinite; }
-.loading-dot:nth-child(2){ animation-delay:.15s; }
-.loading-dot:nth-child(3){ animation-delay:.3s; }
+
+/* Inputs */
+
+.form-input{
+
+    width:100%;
+
+    background:var(--input);
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:16px;
+
+    font-size:.97rem;
+
+    color:var(--text);
+
+    transition:.25s ease;
+}
+
+.form-input::placeholder{
+    color:#B5A69B;
+}
+
+.form-input:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:
+    0 0 0 4px rgba(197,139,91,.12);
+}
+
+/* Benefit Card */
+
+.benefit-card{
+
+    background:
+    rgba(255,255,255,.7);
+
+    border:1px solid rgba(197,139,91,.12);
+
+    border-radius:24px;
+
+    padding:18px;
+}
+
+/* Goal Card */
+
+.goal-card{
+
+    background:#FFFCF8;
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:18px 12px;
+
+    transition:.25s ease;
+
+    cursor:pointer;
+}
+
+.goal-card:hover{
+
+    transform:translateY(-2px);
+
+    border-color:var(--primary);
+
+    box-shadow:
+    0 10px 22px rgba(197,139,91,.08);
+}
+
+.goal-card.active{
+
+    border-color:var(--primary);
+
+    background:
+    rgba(229,198,164,.14);
+
+    box-shadow:
+    0 10px 22px rgba(197,139,91,.08);
+}
+
+.goal-card.active .goal-text{
+    color:var(--primary);
+}
+
+/* Button */
+
+.submit-btn{
+
+    width:100%;
+
+    border:none;
+
+    border-radius:26px;
+
+    padding:18px;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    color:white;
+
+    background:
+    linear-gradient(
+    135deg,
+    #D8A679 0%,
+    #C58B5B 100%
+    );
+
+    box-shadow:
+    0 14px 26px rgba(197,139,91,.18);
+
+    transition:.3s ease;
+}
+
+.submit-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 20px 34px rgba(197,139,91,.22);
+}
+
+.submit-btn:disabled{
+    opacity:.75;
+}
+
+/* Modal */
+
+.modal-card{
+
+    background:
+    rgba(255,255,255,.94);
+
+    backdrop-filter:blur(24px);
+
+    border:1px solid rgba(197,139,91,.12);
+
+    box-shadow:
+    0 10px 40px rgba(177,138,103,.18);
+}
+
+/* Loading */
+
+.loading-dot{
+    animation:bounce 1s infinite;
+}
+
+.loading-dot:nth-child(2){
+    animation-delay:.15s;
+}
+
+.loading-dot:nth-child(3){
+    animation-delay:.3s;
+}
 
 @keyframes bounce{
-    0%,80%,100%{ transform:scale(0); }
-    40%{ transform:scale(1); }
+
+    0%,80%,100%{
+        transform:scale(0);
+    }
+
+    40%{
+        transform:scale(1);
+    }
 }
+
 </style>
 </head>
 
 <body>
 
 <div class="max-w-3xl mx-auto px-4 py-6 sm:py-10">
-    <!-- Card -->
+
     <div class="main-card rounded-[36px] p-6 sm:p-10">
 
         <!-- Header -->
         <div class="text-center">
+
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FFF5EA] border border-[#F1D8BE] text-[#B97A49] text-xs font-semibold tracking-wide">
                 優客多媒體工作坊
             </div>
+
             <h1 class="text-3xl sm:text-4xl font-extrabold mt-5 leading-tight tracking-[-0.03em]">
                 打造你的高變現短影音定位
             </h1>
+
             <p class="mt-4 text-sm sm:text-base text-[#7B6F66] leading-8 max-w-2xl mx-auto">
-                AI 將根據你的品牌、專業與客群，分析最適合你的流量切角、內容方向與短影音腳本策略。
+                AI 將根據你的品牌、專業與客群，
+                自動分析最適合的流量切角、
+                內容方向與短影音腳本策略。
             </p>
+
         </div>
 
-        <!-- LINE Profile -->
-        <div id="profileCard" class="hidden mt-8 bg-white/70 border border-[#EADFD3] rounded-[24px] p-4 flex items-center gap-4">
-            <img id="profileImage" src="" class="w-14 h-14 rounded-full object-cover border border-[#EADFD3]">
+        <!-- Profile -->
+        <div id="profileCard"
+            class="hidden mt-8 bg-white/70 border border-[#EADFD3] rounded-[24px] p-4 flex items-center gap-4">
+
+            <img id="profileImage"
+                src=""
+                class="w-14 h-14 rounded-full object-cover border border-[#EADFD3]">
+
             <div>
-                <div class="text-xs text-[#B08A66] font-semibold mb-1">LINE 使用者</div>
-                <div id="profileName" class="font-bold text-[17px] text-[#3A312B]"></div>
+
+                <div class="text-xs text-[#B08A66] font-semibold mb-1">
+                    LINE 使用者
+                </div>
+
+                <div id="profileName"
+                    class="font-bold text-[17px] text-[#3A312B]">
+                </div>
+
             </div>
+
         </div>
 
-        <!-- Benefits -->
+        <!-- Benefit -->
         <div class="grid sm:grid-cols-2 gap-4 mt-8 mb-10">
+
             <div class="benefit-card">
-                <div class="font-semibold mb-1">✔ AI 流量定位分析</div>
-                <div class="text-sm text-[#7B6F66] leading-7">找出最適合你的市場切角與內容方向</div>
+                <div class="font-semibold mb-1">
+                    ✔ AI 流量定位分析
+                </div>
+
+                <div class="text-sm text-[#7B6F66] leading-7">
+                    找出最適合你的市場切角與內容方向
+                </div>
             </div>
+
             <div class="benefit-card">
-                <div class="font-semibold mb-1">✔ 爆款主題規劃</div>
-                <div class="text-sm text-[#7B6F66] leading-7">提供高互動、高轉換的短影音主題</div>
+                <div class="font-semibold mb-1">
+                    ✔ 爆款主題規劃
+                </div>
+
+                <div class="text-sm text-[#7B6F66] leading-7">
+                    提供高互動、高轉換的短影音主題
+                </div>
             </div>
+
             <div class="benefit-card">
-                <div class="font-semibold mb-1">✔ 開場 Hook 設計</div>
-                <div class="text-sm text-[#7B6F66] leading-7">幫你提升觀看停留與完播率</div>
+                <div class="font-semibold mb-1">
+                    ✔ 開場 Hook 設計
+                </div>
+
+                <div class="text-sm text-[#7B6F66] leading-7">
+                    提升觀看停留率與完播率
+                </div>
             </div>
+
             <div class="benefit-card">
-                <div class="font-semibold mb-1">✔ 個人 IP 建議</div>
-                <div class="text-sm text-[#7B6F66] leading-7">建立你的專業信任與品牌辨識度</div>
+                <div class="font-semibold mb-1">
+                    ✔ 個人 IP 建議
+                </div>
+
+                <div class="text-sm text-[#7B6F66] leading-7">
+                    建立你的專業品牌與信任感
+                </div>
             </div>
+
         </div>
 
         <!-- FORM -->
         <form id="scriptForm" class="space-y-10">
+
             <!-- STEP 1 -->
             <section>
+
                 <div class="border-b border-[#EADFD3] pb-3 mb-6">
-                    <h2 class="text-[18px] font-bold text-[#C58B5B]">Step 1. 品牌與專業定位</h2>
+
+                    <h2 class="text-[18px] font-bold text-[#C58B5B]">
+                        Step 1. 品牌與專業定位
+                    </h2>
+
                 </div>
+
                 <div class="space-y-5">
+
                     <div>
-                        <label class="block text-sm font-semibold mb-2">您的名字 / 品牌名稱</label>
-                        <input type="text" name="name" required placeholder="例如：Kevin / 優客顧問" class="form-input" />
+
+                        <label class="block text-sm font-semibold mb-2">
+                            您的名字 / 品牌名稱
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            required
+                            placeholder="例如：Kevin / 優客顧問"
+                            class="form-input"
+                        />
+
                     </div>
+
                     <div>
-                        <label class="block text-sm font-semibold mb-2">目前職業 / 職稱角色</label>
-                        <input type="text" name="job" required placeholder="例如：品牌顧問 / 空調工程行老闆" class="form-input" />
+
+                        <label class="block text-sm font-semibold mb-2">
+                            目前職業 / 職稱角色
+                        </label>
+
+                        <input
+                            type="text"
+                            name="job"
+                            required
+                            placeholder="例如：品牌顧問 / 空調工程行老闆"
+                            class="form-input"
+                        />
+
                     </div>
+
                     <div>
-                        <label class="block text-sm font-semibold mb-2">您的核心技能 / 服務內容</label>
-                        <textarea name="expertise" rows="4" required placeholder="例如：全委任店家經營自媒體達到線上曝光。" class="form-input resize-none"></textarea>
+
+                        <label class="block text-sm font-semibold mb-2">
+                            您的核心技能 / 服務內容
+                        </label>
+
+                        <textarea
+                            name="expertise"
+                            rows="4"
+                            required
+                            placeholder="例如：全委任店家經營自媒體達到線上曝光。"
+                            class="form-input resize-none"
+                        ></textarea>
+
                     </div>
+
                 </div>
+
             </section>
 
             <!-- STEP 2 -->
             <section>
+
                 <div class="border-b border-[#EADFD3] pb-3 mb-6">
-                    <h2 class="text-[18px] font-bold text-[#C58B5B]">Step 2. 客群與內容目標</h2>
+
+                    <h2 class="text-[18px] font-bold text-[#C58B5B]">
+                        Step 2. 客群與市場方向
+                    </h2>
+
                 </div>
-                <div class="space-y-6">
+
+                <div class="space-y-5">
+
                     <div>
-                        <label class="block text-sm font-semibold mb-2">您的理想客戶是誰？</label>
-                        <input type="text" name="audience" required placeholder="例如：想經營個人品牌的創業者" class="form-input" />
+
+                        <label class="block text-sm font-semibold mb-2">
+                            您的理想客戶是誰？
+                        </label>
+
+                        <input
+                            type="text"
+                            name="audience"
+                            required
+                            placeholder="例如：想經營個人品牌的創業者"
+                            class="form-input"
+                        />
+
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-4">這隻影片想達成的目標？</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                            <label class="goal-card">
-                                <input type="radio" name="goal" value="快速增加粉絲" class="hidden">
-                                <div class="text-center">
-                                    <div class="text-2xl mb-2">📈</div>
-                                    <div class="goal-text text-sm font-semibold text-[#7B6F66]">增加粉絲</div>
-                                </div>
-                            </label>
-                            <label class="goal-card">
-                                <input type="radio" name="goal" value="提高互動與留言" class="hidden">
-                                <div class="text-center">
-                                    <div class="text-2xl mb-2">💬</div>
-                                    <div class="goal-text text-sm font-semibold text-[#7B6F66]">引導留言</div>
-                                </div>
-                            </label>
-                            <label class="goal-card">
-                                <input type="radio" name="goal" value="建立專業信任感" class="hidden">
-                                <div class="text-center">
-                                    <div class="text-2xl mb-2">💎</div>
-                                    <div class="goal-text text-sm font-semibold text-[#7B6F66]">品牌專業</div>
-                                </div>
-                            </label>
-                            <label class="goal-card">
-                                <input type="radio" name="goal" value="提升話題與流量" class="hidden">
-                                <div class="text-center">
-                                    <div class="text-2xl mb-2">🔥</div>
-                                    <div class="goal-text text-sm font-semibold text-[#7B6F66]">話題流量</div>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
+
                 </div>
+
             </section>
 
             <!-- STEP 3 -->
             <section>
+
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#EADFD3] pb-3 mb-6">
-                    <h2 class="text-[18px] font-bold text-[#C58B5B]">Step 3. 客戶最常遇到的問題</h2>
-                    <div class="px-3 py-1 rounded-full bg-[#FFF5EA] border border-[#F1D8BE] text-[#B97A49] text-xs font-semibold">AI 分析核心資料</div>
+
+                    <h2 class="text-[18px] font-bold text-[#C58B5B]">
+                        Step 3. 客戶最常遇到的問題
+                    </h2>
+
+                    <div class="px-3 py-1 rounded-full bg-[#FFF5EA] border border-[#F1D8BE] text-[#B97A49] text-xs font-semibold">
+                        AI 分析核心資料
+                    </div>
+
                 </div>
+
                 <div class="space-y-4">
-                    <input type="text" name="pain_point_1" required placeholder="01｜例如：為什麼短影音都沒流量？" class="form-input" />
-                    <input type="text" name="pain_point_2" required placeholder="02｜例如：不知道該拍什麼內容" class="form-input" />
-                    <input type="text" name="pain_point_3" required placeholder="03｜例如：有專業但不會包裝品牌" class="form-input" />
+
+                    <input
+                        type="text"
+                        name="pain_point_1"
+                        required
+                        placeholder="01｜例如：為什麼短影音都沒流量？"
+                        class="form-input"
+                    />
+
+                    <input
+                        type="text"
+                        name="pain_point_2"
+                        required
+                        placeholder="02｜例如：不知道該拍什麼內容"
+                        class="form-input"
+                    />
+
+                    <input
+                        type="text"
+                        name="pain_point_3"
+                        required
+                        placeholder="03｜例如：有專業但不會包裝品牌"
+                        class="form-input"
+                    />
+
                 </div>
+
+            </section>
+
+            <!-- STEP 4 -->
+            <section>
+
+                <div class="border-b border-[#EADFD3] pb-3 mb-6">
+
+                    <h2 class="text-[18px] font-bold text-[#C58B5B]">
+                        Step 4. 影片想達成的目標
+                    </h2>
+
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+
+                    <label class="goal-card active">
+
+                        <input
+                            type="radio"
+                            name="goal"
+                            value="增加粉絲"
+                            checked
+                            class="hidden">
+
+                        <div class="text-center">
+
+                            <div class="text-2xl mb-2">
+                                📈
+                            </div>
+
+                            <div class="goal-text text-sm font-semibold text-[#7B6F66]">
+                                增加粉絲
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                    <label class="goal-card">
+
+                        <input
+                            type="radio"
+                            name="goal"
+                            value="引導留言"
+                            class="hidden">
+
+                        <div class="text-center">
+
+                            <div class="text-2xl mb-2">
+                                💬
+                            </div>
+
+                            <div class="goal-text text-sm font-semibold text-[#7B6F66]">
+                                引導留言
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                    <label class="goal-card">
+
+                        <input
+                            type="radio"
+                            name="goal"
+                            value="建立品牌專業"
+                            class="hidden">
+
+                        <div class="text-center">
+
+                            <div class="text-2xl mb-2">
+                                💎
+                            </div>
+
+                            <div class="goal-text text-sm font-semibold text-[#7B6F66]">
+                                品牌專業
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                    <label class="goal-card">
+
+                        <input
+                            type="radio"
+                            name="goal"
+                            value="提升話題流量"
+                            class="hidden">
+
+                        <div class="text-center">
+
+                            <div class="text-2xl mb-2">
+                                🔥
+                            </div>
+
+                            <div class="goal-text text-sm font-semibold text-[#7B6F66]">
+                                話題流量
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
             </section>
 
             <!-- SUBMIT -->
-            <button type="submit" id="submitBtn" class="submit-btn flex items-center justify-center gap-3">
-                <span id="btnText">開始生成30秒口播檔案</span>
-                <div id="loadingDots" class="hidden items-center gap-1">
+            <button
+                type="submit"
+                id="submitBtn"
+                class="submit-btn flex items-center justify-center gap-3">
+
+                <span id="btnText">
+                    開始生成 30 秒口播腳本
+                </span>
+
+                <div id="loadingDots"
+                    class="hidden items-center gap-1">
+
                     <div class="loading-dot w-2 h-2 rounded-full bg-white"></div>
                     <div class="loading-dot w-2 h-2 rounded-full bg-white"></div>
                     <div class="loading-dot w-2 h-2 rounded-full bg-white"></div>
+
                 </div>
+
             </button>
+
         </form>
+
     </div>
+
 </div>
 
 <!-- SUCCESS MODAL -->
-<div id="successModal" class="hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+<div id="successModal"
+    class="hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+
     <div class="modal-card max-w-md w-full rounded-[36px] p-8 text-center">
-        <div class="w-20 h-20 rounded-full bg-[#F8EEE4] border border-[#EFD8BE] flex items-center justify-center mx-auto text-3xl mb-5">✨</div>
-        <h3 class="text-2xl font-bold text-[#3A312B] mb-3">AI 顧問已開始分析</h3>
+
+        <div class="w-20 h-20 rounded-full bg-[#F8EEE4] border border-[#EFD8BE] flex items-center justify-center mx-auto text-3xl mb-5">
+            ✨
+        </div>
+
+        <h3 class="text-2xl font-bold text-[#3A312B] mb-3">
+            表單已送出成功
+        </h3>
+
         <p class="text-sm text-[#7B6F66] leading-8 mb-6">
-            表單資料已傳送至您的 LINE 聊天室！<br>AI 正在全力計算您的專屬流量策略，請關閉此分頁檢視聊天室回覆。
+            AI 已開始分析你的品牌定位與腳本方向，
+            請回到聊天室查看回覆內容。
         </p>
-        <button onclick="closeLiffWindow()" class="w-full py-4 rounded-2xl text-white font-bold" style="background: linear-gradient(135deg, #D8A679 0%, #C58B5B 100%);">
+
+        <button
+            onclick="closeLiffWindow()"
+            class="w-full py-4 rounded-2xl text-white font-bold"
+            style="
+            background:
+            linear-gradient(
+            135deg,
+            #D8A679 0%,
+            #C58B5B 100%
+            );
+            ">
+
             完成
+
         </button>
+
     </div>
+
 </div>
 
 <script>
-const LIFF_ID = "2009393389-xo7I4wWZ";
+
+/* =====================================
+   LIFF
+===================================== */
+
+const LIFF_ID =
+"2009393389-xo7I4wWZ";
+
 let lineProfile = null;
 
+/* =====================================
+   Init LIFF
+===================================== */
+
 async function initializeLiff(){
+
     try{
-        await liff.init({ liffId: LIFF_ID });
-        if(!liff.isLoggedIn()){
-            liff.login();
+
+        await liff.init({
+            liffId: LIFF_ID,
+            withLoginOnExternalBrowser: true
+        });
+
+        await liff.ready;
+
+        // 強制只能從 LINE App 開
+        if(!liff.isInClient()){
+
+            alert("請從 LINE 官方帳號聊天室內開啟");
+
+            location.href =
+            "https://liff.line.me/2009393389-xo7I4wWZ";
+
             return;
         }
-        lineProfile = await liff.getProfile();
-        
-        document.getElementById("profileCard").classList.remove("hidden");
-        document.getElementById("profileImage").src = lineProfile.pictureUrl;
-        document.getElementById("profileName").textContent = lineProfile.displayName;
+
+        // Profile
+        lineProfile =
+        await liff.getProfile();
+
+        document
+        .getElementById("profileCard")
+        .classList.remove("hidden");
+
+        document
+        .getElementById("profileImage")
+        .src =
+        lineProfile.pictureUrl;
+
+        document
+        .getElementById("profileName")
+        .textContent =
+        lineProfile.displayName;
+
+        console.log("LIFF READY");
+
+        console.log(
+            "isInClient:",
+            liff.isInClient()
+        );
+
     }catch(error){
-        console.error("LIFF 初始化失敗:", error);
-        alert("LIFF 初始化失敗");
+
+        console.error(error);
+
+        alert(
+            JSON.stringify(error,null,2)
+        );
     }
 }
+
 initializeLiff();
 
-/* Goal Cards 選取邏輯 */
-const goalCards = document.querySelectorAll(".goal-card");
+/* =====================================
+   Goal Cards
+===================================== */
+
+const goalCards =
+document.querySelectorAll(".goal-card");
+
 goalCards.forEach(card => {
-    const radio = card.querySelector('input[type="radio"]');
+
+    const radio =
+    card.querySelector(
+        'input[type="radio"]'
+    );
+
     card.addEventListener("click", () => {
-        goalCards.forEach(c => { c.classList.remove("active"); });
+
+        goalCards.forEach(c => {
+            c.classList.remove("active");
+        });
+
         card.classList.add("active");
+
         radio.checked = true;
     });
 });
 
-/* =========================================
-   修正後的 Submit：代替客戶在 LINE 聊天室發話
-========================================= */
-document.getElementById("scriptForm").addEventListener("submit", async function(e){
+/* =====================================
+   Submit
+===================================== */
+
+document
+.getElementById("scriptForm")
+.addEventListener(
+"submit",
+async function(e){
+
     e.preventDefault();
 
-    const submitBtn = document.getElementById("submitBtn");
-    const btnText = document.getElementById("btnText");
-    const loadingDots = document.getElementById("loadingDots");
+    const submitBtn =
+    document.getElementById("submitBtn");
+
+    const btnText =
+    document.getElementById("btnText");
+
+    const loadingDots =
+    document.getElementById("loadingDots");
+
+    /* Loading */
 
     submitBtn.disabled = true;
-    btnText.textContent = "正在傳送資料至聊天室...";
+
+    btnText.textContent =
+    "正在傳送至 LINE 聊天室";
+
     loadingDots.classList.remove("hidden");
     loadingDots.classList.add("flex");
 
-    const formData = new FormData(this);
-    const name = formData.get("name");
-    const job = formData.get("job");
-    const expertise = formData.get("expertise");
-    const audience = formData.get("audience");
-    const video_goal = formData.get("goal") || "未選擇";
-    const p1 = formData.get("pain_point_1");
-    const p2 = formData.get("pain_point_2");
-    const p3 = formData.get("pain_point_3");
+    try{
 
-    // 格式化要讓客戶自動喊出的文字訊息
-    const messageText = `【AI短影音定位健檢表單】\n` +
-                        `• 名字/品牌：${name}\n` +
-                        `• 職業職稱：${job}\n` +
-                        `• 核心技能：${expertise}\n` +
-                        `• 理想客戶：${audience}\n` +
-                        `• 影片目標：${video_goal}\n` +
-                        `• 常見痛點 1：${p1}\n` +
-                        `• 常見痛點 2：${p2}\n` +
-                        `• 常見痛點 3：${p3}`;
+        const formData =
+        new FormData(this);
 
-    try {
-        // 判斷是否在 LINE App 內打開，只有在 App 內才能代替客戶發話
-        if (liff.isInClient()) {
-            
-            // 核心功能：使用 LIFF SDK 發送訊息至當前對話框
-            await liff.sendMessages([
-                {
-                    type: 'text',
-                    text: messageText
-                }
-            ]);
+        const messageText =
+`【AI短影音定位健檢】  
 
-            // 發送成功，顯示成功 Modal
-            document.getElementById("successModal").classList.remove("hidden");
+👤 名字/品牌：
+${formData.get("name")}
 
-        } else {
-            alert("請在 LINE 聊天室內直接打開此連結，才能啟用自動發送功能喔！");
-            console.log("表單預計發送內容：", messageText);
-        }
-    } catch (error) {
-        console.error("LINE 訊息發送失敗:", error);
-        alert("訊息發送失敗，請確認是否已授權 chat_message.write 權限。");
-    } finally {
+💼 職業角色：
+${formData.get("job")}
+
+🧠 核心技能：
+${formData.get("expertise")}
+
+🎯 理想客戶：
+${formData.get("audience")}
+
+📈 影片目標：
+${formData.get("goal")}
+
+❓ 客戶痛點：
+
+1. ${formData.get("pain_point_1")}
+
+2. ${formData.get("pain_point_2")}
+
+3. ${formData.get("pain_point_3")}`;
+
+        console.log(messageText);
+
+        // 核心：直接代替客戶發送
+        await liff.sendMessages([
+            {
+                type:"text",
+                text:messageText
+            }
+        ]);
+
+        // 成功
+        document
+        .getElementById("successModal")
+        .classList.remove("hidden");
+
+    }catch(error){
+
+        console.error(
+            "LINE SEND ERROR:",
+            JSON.stringify(error,null,2)
+        );
+
+        alert(
+            "發送失敗：\n\n" +
+            JSON.stringify(error,null,2)
+        );
+    }
+
+    finally{
+
         submitBtn.disabled = false;
-        btnText.textContent = "開始生成30秒口播檔案";
+
+        btnText.textContent =
+        "開始生成 30 秒口播腳本";
+
         loadingDots.classList.add("hidden");
+
         loadingDots.classList.remove("flex");
     }
 });
 
+/* =====================================
+   Close Window
+===================================== */
+
 function closeLiffWindow(){
+
     if(liff.isInClient()){
+
         liff.closeWindow();
+
     }else{
+
         window.close();
     }
 }
+
 </script>
+
 </body>
 </html>
